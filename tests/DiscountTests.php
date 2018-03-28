@@ -8,8 +8,16 @@
 
 use PHPUnit\Framework\TestCase;
 
+require_once "../src/discounts/XPctTotalDiscountOnYAlreadyOrdered.php";
+
 class DiscountTests extends TestCase
 {
+
+    /**
+     * A lot of testing issues with paths, not sure how to fix these.
+     * I CANT EVEN TEST MY TESTS
+     */
+
     /**
      * Discount case 1:
      * Customers that have already order for over € 1000 get a 10% discount on every order they make.
@@ -34,12 +42,14 @@ class DiscountTests extends TestCase
                         "total": "49.90"
                         }';
 
-        $order = json_decode($order, true);
+        $order = json_decode($order);
+        $order->totalAfterDiscounts = $order->total;
+
+
 
         // First test, should not get a discount since totalOrdered < Requirement
         $totalOrderedRequirement = 1000;
         $percentDiscount = 10;
-
         $discount10pctCustomerAlreadyBought1K = new XPctTotalDiscountOnYAlreadyOrdered("10% Total discount on order, for already buying for over €1000."
             , $totalOrderedRequirement, $percentDiscount);
 
@@ -51,13 +61,14 @@ class DiscountTests extends TestCase
         // Second test, should get a discount
         $totalOrderedRequirement = 200;
         $percentDiscount = 10;
-        $discount10pctCustomerAlreadyBought1K = new XPctTotalDiscountOnYAlreadyOrdered("10% Total discount on order, for already buying for over €1000."
+        $discount10pctCustomerAlreadyBought1K = new XPctTotalDiscountOnYAlreadyOrdered("10% Total discount on order, for already buying for over €200."
             , $totalOrderedRequirement, $percentDiscount);
 
         //Test should be true
         $this->assertEquals(true, $discount10pctCustomerAlreadyBought1K->isValid($order));
         // 10% Discount on 49.90 should be 44.91
-        $this->assertEquals(44.91, $discount10pctCustomerAlreadyBought1K->calcDiscount($order)["discount"]);
+        $discount10pctCustomerAlreadyBought1K->calcDiscount($order);
+        $this->assertEquals(44.91, $order->total);
     }
 
     //TODO: Write tests for 2 remaining discount cases
