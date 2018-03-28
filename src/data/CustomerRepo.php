@@ -8,6 +8,10 @@
 
 class CustomerRepo
 {
+    /**
+     * Imagine this is an API call
+     */
+
     public function getCustomerById($id)
     {
         $customerJson = file_get_contents("../../data/customers.json");
