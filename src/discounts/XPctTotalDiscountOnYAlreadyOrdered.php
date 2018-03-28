@@ -9,7 +9,7 @@
 require "../data/CustomerRepo.php";
 require "Discount.php";
 
-
+//TODO refactor
 /**
  * Discount case 1:
  * Customers that have already ordered for over € X get a Y% discount on every order they make.

@@ -8,6 +8,8 @@
 
 require_once "../data/ProductRepo.php";
 
+//TODO REFACTOR
+
 class XFreeItemsWhenBuyingYFromCatZ
 {
     /**
@@ -73,12 +75,9 @@ class XFreeItemsWhenBuyingYFromCatZ
          * Adding price you'd normally pay for the extra items to the order, so customers can see how much he / she's saving
          */
 
-        //TODO better discount message
 
         $discount = $numberOfFreeItemsToAdd * $item->{"unit-price"};
         $item->quantity += $numberOfFreeItemsToAdd;
-        $item->total += $discount;
-        $order->total += $discount;
         $order->discounts[] = new Discount($this->getReason(), $discount);
     }
 

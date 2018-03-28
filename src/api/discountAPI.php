@@ -7,11 +7,13 @@
  */
 
 // TODO: Write REST API, setup web server for this. And discountcalculator class.
+// TODO better discount message (format)
 
 include_once "../discounts/XPctTotalDiscountOnYAlreadyOrdered.php";
 include_once "../discounts/XFreeItemsWhenBuyingYFromCatZ.php";
+include_once "../discounts/XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory.php";
 
-$order = '{
+$order1 = '{
                         "id": "1",
                         "customer-id": "2",
                         "items": [
@@ -24,8 +26,34 @@ $order = '{
                         ],
                         "total": "49.90"
                         }';
+$order2 = '{
+                "id": "3",
+              "customer-id": "3",
+              "items": [
+                {
+                    "product-id": "A101",
+                  "quantity": "2",
+                  "unit-price": "9.75",
+                  "total": "19.50"
+                },
+                {
+                    "product-id": "A102",
+                  "quantity": "1",
+                  "unit-price": "49.50",
+                  "total": "49.50"
+                },
+                 {
+                        "product-id": "B102",
+                        "quantity": "10",
+                        "unit-price": "4.99",
+                        "total": "49.90"
+                        }
+              ],
+              "total": "69.00"
+            }';
 
-$order = json_decode($order);
+
+$order = json_decode($order2);
 $order->totalAfterDiscounts = $order->total;
 $order->discounts = array();
 
@@ -35,7 +63,7 @@ $order->discounts = array();
  */
 
 $discountWorker1 = new XPctTotalDiscountOnYAlreadyOrdered("10% total discount on order, for already buying for over €1000.",
-    200, 10);
+    1000, 10);
 
 $discountWorker1->calcDiscount($order);
 
@@ -49,21 +77,31 @@ $discountWorker2 = new XFreeItemsWhenBuyingYFromCatZ("For every product of categ
     1, 5, 2);
 $discountWorker2->calcDiscount($order);
 
+
+/**
+ * Discount case 3:
+ * If you buy two or more products of category "Tools" (id 1), you get a 20% discount on the cheapest product.
+ */
+
+$discountWorker3 = new XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory("If you buy two or more products of category \"Tools\" (id 1), you get a 20% discount on the cheapest product.",
+    20, 2, 1);
+$discountWorker3->calcDiscount($order);
+
 /**
  *Testing the old fashioned way, unsure how to fix phpunit issues
  */
 
-foreach ($order as $prop => $value) {
-    print("\n" . $prop . ":" . $value);
-}
-echo "\n" . $order->totalAfterDiscounts;
-foreach ($order->items as $i) {
-    print("\n" . "Quantity: " . $i->quantity . " ,Total:" . $i->total . " ,Unit-price" . $i->{"unit-price"});
-}
-
-foreach ($order->discounts as $d) {
-    print("\n" . "Reason: " . $d->reason . " ,Discount:" . $d->discount);
-}
+//foreach ($order as $prop => $value) {
+//    print("\n" . $prop . ":" . $value);
+//}
+//echo "\n" . $order->totalAfterDiscounts;
+//foreach ($order->items as $i) {
+//    print("\n" . "Quantity: " . $i->quantity . " ,Total:" . $i->total . " ,Unit-price" . $i->{"unit-price"});
+//}
+//
+//foreach ($order->discounts as $d) {
+//    print("\n" . "Reason: " . $d->reason . " ,Discount:" . $d->discount);
+//}
 
 
 
