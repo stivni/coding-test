@@ -6,6 +6,8 @@
  * Time: 14:41
  */
 
+namespace App\Model;
+
 class Discount
 {
     public $reason;

@@ -6,6 +6,8 @@
  * Time: 12:05
  */
 
+namespace App\Data;
+
 class CustomerRepo
 {
     /**
@@ -14,7 +16,8 @@ class CustomerRepo
 
     public function getCustomerById($id)
     {
-        $customerJson = file_get_contents("../../data/customers.json");
+        $customerJson = file_get_contents(__DIR__ . "/../../data/customers.json");
+
 
         $customerArr = json_decode($customerJson);
 

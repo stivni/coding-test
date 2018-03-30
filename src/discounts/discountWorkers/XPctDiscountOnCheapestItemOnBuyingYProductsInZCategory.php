@@ -6,7 +6,10 @@
  * Time: 18:47
  */
 
+namespace App\Discounts\DiscountWorkers;
 
+use App\Data\ProductRepo;
+use App\Model\Discount;
 /**
  * Discount case 3:
  * If you buy two or more products of category "Tools" (id 1), you get a 20% discount on the cheapest product.

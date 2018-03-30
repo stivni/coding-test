@@ -8,7 +8,10 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once "../src/discounts/XPctTotalDiscountOnYAlreadyOrdered.php";
+
+use App\Discounts\DiscountWorkers\XPctTotalDiscountOnYAlreadyOrdered;
+
+
 
 class DiscountTests extends TestCase
 {
@@ -24,7 +27,6 @@ class DiscountTests extends TestCase
      *
      */
 
-    //TODO: Write all code for discount case 1
 
     public function test10pctDiscountOn1000AlreadyOrdered()
     {
@@ -50,7 +52,7 @@ class DiscountTests extends TestCase
         // First test, should not get a discount since totalOrdered < Requirement
         $totalOrderedRequirement = 1000;
         $percentDiscount = 10;
-        $discount10pctCustomerAlreadyBought1K = new XPctTotalDiscountOnYAlreadyOrdered("10% Total discount on order, for already buying for over €1000."
+        $discount10pctCustomerAlreadyBought1K = new     XPctTotalDiscountOnYAlreadyOrdered("10% Total discount on order, for already buying for over €1000."
             , $totalOrderedRequirement, $percentDiscount);
 
 
@@ -68,8 +70,9 @@ class DiscountTests extends TestCase
         $this->assertEquals(true, $discount10pctCustomerAlreadyBought1K->isValid($order));
         // 10% Discount on 49.90 should be 44.91
         $discount10pctCustomerAlreadyBought1K->calcDiscount($order);
-        $this->assertEquals(44.91, $order->total);
+        $this->assertEquals(44.9, $order->total);
     }
+
 
     //TODO: Write tests for 2 remaining discount cases
 }

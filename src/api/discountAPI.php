@@ -6,12 +6,11 @@
  * Time: 12:34
  */
 
+namespace App\API;
+
 // TODO: Write REST API, setup web server for this. And discountcalculator class.
 // TODO better discount message (format)
 
-include_once "../discounts/XPctTotalDiscountOnYAlreadyOrdered.php";
-include_once "../discounts/XFreeItemsWhenBuyingYFromCatZ.php";
-include_once "../discounts/XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory.php";
 
 $order1 = '{
                         "id": "1",
@@ -102,7 +101,6 @@ $discountWorker3->calcDiscount($order);
 //foreach ($order->discounts as $d) {
 //    print("\n" . "Reason: " . $d->reason . " ,Discount:" . $d->discount);
 //}
-
 
 
 

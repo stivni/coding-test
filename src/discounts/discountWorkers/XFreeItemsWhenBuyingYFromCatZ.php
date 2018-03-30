@@ -6,7 +6,11 @@
  * Time: 16:54
  */
 
-require_once "../data/ProductRepo.php";
+namespace App\Discounts\DiscountWorkers;
+
+
+use App\Data\ProductRepo;
+use App\Model\Discount;
 
 //TODO REFACTOR
 
@@ -70,11 +74,6 @@ class XFreeItemsWhenBuyingYFromCatZ
 
     function applyDiscounts(&$order, &$item, $numberOfFreeItemsToAdd)
     {
-
-        /**
-         * Adding price you'd normally pay for the extra items to the order, so customers can see how much he / she's saving
-         */
-
 
         $discount = $numberOfFreeItemsToAdd * $item->{"unit-price"};
         $item->quantity += $numberOfFreeItemsToAdd;

@@ -6,10 +6,11 @@
  * Time: 12:01
  */
 
-require "../data/CustomerRepo.php";
-require "Discount.php";
 
+namespace App\Discounts\DiscountWorkers;
 //TODO refactor
+use App\Data\CustomerRepo;
+use App\Model\Discount;
 /**
  * Discount case 1:
  * Customers that have already ordered for over € X get a Y% discount on every order they make.
@@ -39,7 +40,11 @@ class XPctTotalDiscountOnYAlreadyOrdered
         if ($this->isValid($order)) {
 
             $discount = round($order->totalAfterDiscounts * ($this->getPctDiscount() / 100), 2);
+//            echo $order->totalAfterDiscounts;
+
             $order->totalAfterDiscounts -= $discount;
+
+            $order->totalAfterDiscounts;
             $order->discounts[] = new Discount($this->reason, $discount);
         }
 

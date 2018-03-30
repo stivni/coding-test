@@ -6,6 +6,8 @@
  * Time: 17:38
  */
 
+namespace App\Data;
+
 class ProductRepo
 {
     /**
@@ -14,7 +16,7 @@ class ProductRepo
 
     public function getProductById($id)
     {
-        $productJson = file_get_contents("../../data/products.json");
+        $productJson = file_get_contents(__DIR__ . "/../../data/products.json");
 
         $productArr = json_decode($productJson);
 
