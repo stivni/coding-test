@@ -23,6 +23,9 @@ class XPctTotalDiscountOnYAlreadyOrdered
 
     /**
      * XPctTotalDiscountOnYAlreadyOrdered constructor.
+     * @param $reason
+     * @param $totalOrderedRequirement
+     * @param $pctDiscount
      */
     public function __construct($reason, $totalOrderedRequirement, $pctDiscount)
     {

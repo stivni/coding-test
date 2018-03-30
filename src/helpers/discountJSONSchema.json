@@ -1,0 +1,91 @@
+{
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$id": "/properties/id",
+      "type": "string",
+      "title": "The Id Schema ",
+      "default": "",
+      "examples": [
+        "3"
+      ]
+    },
+    "customer-id": {
+      "$id": "/properties/customer-id",
+      "type": "string",
+      "title": "The Customer-id Schema ",
+      "default": "",
+      "examples": [
+        "3"
+      ]
+    },
+    "items": {
+      "$id": "/properties/items",
+      "type": "array",
+      "items": {
+        "$id": "/properties/items/items",
+        "type": "object",
+        "properties": {
+          "product-id": {
+            "$id": "/properties/items/items/properties/product-id",
+            "type": "string",
+            "title": "The Product-id Schema ",
+            "default": "",
+            "examples": [
+              "A101"
+            ]
+          },
+          "quantity": {
+            "$id": "/properties/items/items/properties/quantity",
+            "type": "string",
+            "title": "The Quantity Schema ",
+            "default": "",
+            "examples": [
+              "2"
+            ]
+          },
+          "unit-price": {
+            "$id": "/properties/items/items/properties/unit-price",
+            "type": "string",
+            "title": "The Unit-price Schema ",
+            "default": "",
+            "examples": [
+              "9.75"
+            ]
+          },
+          "total": {
+            "$id": "/properties/items/items/properties/total",
+            "type": "string",
+            "title": "The Total Schema ",
+            "default": "",
+            "examples": [
+              "19.50"
+            ]
+          }
+        },
+        "required": [
+          "product-id",
+          "quantity",
+          "unit-price",
+          "total"
+        ]
+      }
+    },
+    "total": {
+      "$id": "/properties/total",
+      "type": "string",
+      "title": "The Total Schema ",
+      "default": "",
+      "examples": [
+        "69.00"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "customer-id",
+    "items",
+    "total"
+  ]
+}

@@ -4,6 +4,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 use App\Discounts\DiscountCalculator;
+use App\Helpers\jsonHelper;
 
 /**
  * Created by PhpStorm.
@@ -16,18 +17,23 @@ $app = new \Slim\App;
 
 $app->post('/api/discounts', function (Request $request, Response $response) {
 
-    try {
+
         $cType = $request->getHeader('Content-Type');
-        if (strcmp($cType[0], 'application/json') !== false) {
+    if (strcmp($cType[0], 'application/json') !== false && jsonHelper::isJson($request->getBody()) && jsonHelper::jsonSchemaChecker($request->getBody())) {
+
             $order = json_decode($request->getBody());
             $discountCalculator = new DiscountCalculator();
             $order = $discountCalculator->calcDiscounts($order);
             return $response->withJSON($order);
-        }
-    } catch (Exception $e) {
+        } else {
         return $response->withStatus(500)
             ->withHeader('Content-Type', 'text/html')
             ->write('Something went wrong!');
     }
 
+
+
 });
+
+
+
