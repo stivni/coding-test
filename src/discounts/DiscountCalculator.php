@@ -26,7 +26,7 @@ class DiscountCalculator
     public function calcDiscounts($order)
     {
 
-        $order = json_decode($order);
+
         $order->totalAfterDiscounts = $order->total;
         $order->discounts = array();
 
