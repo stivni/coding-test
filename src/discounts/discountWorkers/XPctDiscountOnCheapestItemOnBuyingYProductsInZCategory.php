@@ -101,17 +101,17 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory
     /**
      * @return mixed
      */
-    public function getNumberOfItemsNeeded()
+    public function getNumberOfProductsNeeded()
     {
-        return $this->numberOfItemsNeeded;
+        return $this->numberOfProductsNeeded;
     }
 
     /**
-     * @param mixed $numberOfItemsNeeded
+     * @param mixed $numberOfProductsNeeded
      */
-    public function setNumberOfItemsNeeded($numberOfItemsNeeded)
+    public function setNumberOfProductsNeeded($numberOfProductsNeeded)
     {
-        $this->numberOfItemsNeeded = $numberOfItemsNeeded;
+        $this->numberOfProductsNeeded = $numberOfProductsNeeded;
     }
 
     /**

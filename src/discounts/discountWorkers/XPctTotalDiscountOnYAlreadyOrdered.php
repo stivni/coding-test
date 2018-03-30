@@ -38,12 +38,8 @@ class XPctTotalDiscountOnYAlreadyOrdered
          *
          */
         if ($this->isValid($order)) {
-
             $discount = round($order->totalAfterDiscounts * ($this->getPctDiscount() / 100), 2);
-//            echo $order->totalAfterDiscounts;
-
             $order->totalAfterDiscounts -= $discount;
-
             $order->totalAfterDiscounts;
             $order->discounts[] = new Discount($this->reason, $discount);
         }
@@ -58,7 +54,7 @@ class XPctTotalDiscountOnYAlreadyOrdered
 
         $customerRepo = new CustomerRepo();
 
-        return $customerRepo->getCustomerById($order->id)->revenue >= $this->getTotalOrderedRequirement() ? true : false;
+        return $customerRepo->getCustomerById($order->{"customer-id"})->revenue >= $this->getTotalOrderedRequirement() ? true : false;
     }
 
     public function toString()
@@ -125,6 +121,4 @@ class XPctTotalDiscountOnYAlreadyOrdered
         $this->pctDiscount = $pctDiscount;
         return $this;
     }
-
-
 }
