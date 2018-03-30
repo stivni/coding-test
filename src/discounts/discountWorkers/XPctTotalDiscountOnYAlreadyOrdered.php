@@ -8,7 +8,7 @@
 
 
 namespace App\Discounts\DiscountWorkers;
-//TODO refactor
+
 use App\Data\CustomerRepo;
 use App\Model\Discount;
 /**
@@ -26,9 +26,9 @@ class XPctTotalDiscountOnYAlreadyOrdered
      */
     public function __construct($reason, $totalOrderedRequirement, $pctDiscount)
     {
-        $this->setReason($reason);
-        $this->setTotalOrderedRequirement($totalOrderedRequirement);
-        $this->setPctDiscount($pctDiscount);
+        $this->reason = $reason;
+        $this->totalOrderedRequirement = $totalOrderedRequirement;
+        $this->pctDiscount = $pctDiscount;
     }
 
     public function calcDiscount(&$order)
@@ -41,7 +41,7 @@ class XPctTotalDiscountOnYAlreadyOrdered
             $discount = round($order->totalAfterDiscounts * ($this->getPctDiscount() / 100), 2);
             $order->totalAfterDiscounts -= $discount;
             $order->totalAfterDiscounts;
-            $order->discounts[] = new Discount($this->reason, $discount);
+            $order->discounts[] = new Discount($this->getReason(), $discount);
         }
 
     }
@@ -52,73 +52,37 @@ class XPctTotalDiscountOnYAlreadyOrdered
          * Checks if customer is eligible for discount, revenue must be >= totalOrderedRequirement
          */
 
-        $customerRepo = new CustomerRepo();
+        $customerRepo = CustomerRepo::instance();
 
         return $customerRepo->getCustomerById($order->{"customer-id"})->revenue >= $this->getTotalOrderedRequirement() ? true : false;
     }
 
-    public function toString()
-    {
-        /**
-         * Returns discount reason in format that can be converted to json
-         */
-        return $this->getReason();
-
-
-    }
-
 
     /**
      * @return mixed
      */
-    public function getReason()
+    private function getReason()
     {
         return $this->reason;
     }
 
-    /**
-     * @param mixed $reason
-     * @return XPctTotalDiscountOnYAlreadyOrdered
-     */
-    public function setReason($reason)
-    {
-        $this->reason = $reason;
-        return $this;
-    }
 
     /**
      * @return mixed
      */
-    public function getTotalOrderedRequirement()
+    private function getTotalOrderedRequirement()
     {
         return $this->totalOrderedRequirement;
     }
 
-    /**
-     * @param mixed $totalOrderedRequirement
-     * @return XPctTotalDiscountOnYAlreadyOrdered
-     */
-    public function setTotalOrderedRequirement($totalOrderedRequirement)
-    {
-        $this->totalOrderedRequirement = $totalOrderedRequirement;
-        return $this;
-    }
 
     /**
      * @return mixed
      */
-    public function getPctDiscount()
+    private function getPctDiscount()
     {
         return $this->pctDiscount;
     }
 
-    /**
-     * @param mixed $pctDiscount
-     * @return XPctTotalDiscountOnYAlreadyOrdered
-     */
-    public function setPctDiscount($pctDiscount)
-    {
-        $this->pctDiscount = $pctDiscount;
-        return $this;
-    }
+
 }

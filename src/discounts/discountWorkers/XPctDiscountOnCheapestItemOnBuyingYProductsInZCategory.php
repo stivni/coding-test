@@ -42,7 +42,7 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory
         $amountOfProductsInCategory = 0;
         $cheapestItem = null;
 
-        $productRepo = new ProductRepo();
+        $productRepo = ProductRepo::instance();
 
         foreach ($order->items as &$item) {
             $product = $productRepo->getProductById($item->{"product-id"});
@@ -57,14 +57,13 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory
             }
 
         }
-        if ($amountOfProductsInCategory >= $this->numberOfProductsNeeded) {
+        if ($amountOfProductsInCategory >= $this->getNumberOfProductsNeeded()) {
             $discount = round($cheapestItem->total * ($this->getPctDiscount() / 100), 2);
             $order->totalAfterDiscounts -= $discount;
             $order->discounts[] = new Discount($this->getReason(), $discount);
         }
 
     }
-
 
     /**
      * @return mixed
@@ -74,13 +73,6 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory
         return $this->reason;
     }
 
-    /**
-     * @param mixed $reason
-     */
-    public function setReason($reason)
-    {
-        $this->reason = $reason;
-    }
 
     /**
      * @return mixed
@@ -90,13 +82,6 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory
         return $this->pctDiscount;
     }
 
-    /**
-     * @param mixed $pctDiscount
-     */
-    public function setPctDiscount($pctDiscount)
-    {
-        $this->pctDiscount = $pctDiscount;
-    }
 
     /**
      * @return mixed
@@ -106,13 +91,6 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory
         return $this->numberOfProductsNeeded;
     }
 
-    /**
-     * @param mixed $numberOfProductsNeeded
-     */
-    public function setNumberOfProductsNeeded($numberOfProductsNeeded)
-    {
-        $this->numberOfProductsNeeded = $numberOfProductsNeeded;
-    }
 
     /**
      * @return mixed
@@ -122,13 +100,6 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory
         return $this->validCategory;
     }
 
-    /**
-     * @param mixed $validCategory
-     */
-    public function setValidCategory($validCategory)
-    {
-        $this->validCategory = $validCategory;
-    }
 
 
 }

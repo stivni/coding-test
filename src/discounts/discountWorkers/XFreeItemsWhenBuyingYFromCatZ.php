@@ -12,7 +12,6 @@ namespace App\Discounts\DiscountWorkers;
 use App\Data\ProductRepo;
 use App\Model\Discount;
 
-//TODO REFACTOR
 
 class XFreeItemsWhenBuyingYFromCatZ
 {
@@ -51,7 +50,7 @@ class XFreeItemsWhenBuyingYFromCatZ
          *  Applies discounts
          */
 
-        $productRepo = new ProductRepo();
+        $productRepo = ProductRepo::instance();
 
         foreach ($order->items as &$item) {
             $product = $productRepo->getProductById($item->{"product-id"});
@@ -89,15 +88,6 @@ class XFreeItemsWhenBuyingYFromCatZ
         return $this->reason;
     }
 
-    /**
-     * @param mixed $reason
-     * @return XFreeItemsWhenBuyingYFromCatZ
-     */
-    public function setReason($reason)
-    {
-        $this->reason = $reason;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -107,15 +97,6 @@ class XFreeItemsWhenBuyingYFromCatZ
         return $this->numberOfFreeItems;
     }
 
-    /**
-     * @param mixed $numberOfFreeItems
-     * @return XFreeItemsWhenBuyingYFromCatZ
-     */
-    public function setNumberOfFreeItems($numberOfFreeItems)
-    {
-        $this->numberOfFreeItems = $numberOfFreeItems;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -125,15 +106,6 @@ class XFreeItemsWhenBuyingYFromCatZ
         return $this->numberOfItemsNeeded;
     }
 
-    /**
-     * @param mixed $numberOfItemsNeeded
-     * @return XFreeItemsWhenBuyingYFromCatZ
-     */
-    public function setNumberOfItemsNeeded($numberOfItemsNeeded)
-    {
-        $this->numberOfItemsNeeded = $numberOfItemsNeeded;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -143,15 +115,6 @@ class XFreeItemsWhenBuyingYFromCatZ
         return $this->validCategory;
     }
 
-    /**
-     * @param mixed $validCategory
-     * @return XFreeItemsWhenBuyingYFromCatZ
-     */
-    public function setValidCategory($validCategory)
-    {
-        $this->validCategory = $validCategory;
-        return $this;
-    }
 
 
 }

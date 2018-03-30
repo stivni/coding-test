@@ -63,21 +63,6 @@ class DiscountCalculator
         return $order;
 
 
-        /**
-         *Testing the old fashioned way, unsure how to fix phpunit issues
-         */
-
-//        foreach ($order as $prop => $value) {
-//            print("\n" . $prop . ":" . $value);
-//        }
-//        echo "\n" . $order->totalAfterDiscounts;
-//        foreach ($order->items as $i) {
-//            print("\n" . "Quantity: " . $i->quantity . " ,Total:" . $i->total . " ,Unit-price" . $i->{"unit-price"});
-//        }
-//
-//        foreach ($order->discounts as $d) {
-//            print("\n" . "Reason: " . $d->reason . " ,Discount:" . $d->discount);
-//        }
 
     }
 
