@@ -36,4 +36,5 @@ $order = '{
             }';
 
 $discountCalculator = new DiscountCalculator();
-$discountCalculator->calcDiscounts($order);
+$discountedOrderJson = json_encode($discountCalculator->calcDiscounts($order), JSON_PRETTY_PRINT);
+print($discountedOrderJson);
