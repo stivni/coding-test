@@ -6,6 +6,6 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../vendor/autoload.php';
 
 // Discount Routers
-require "../src/routes/discounts.php";
+require "../src/routes/routeDiscounts.php";
 
 $app->run();

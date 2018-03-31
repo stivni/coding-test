@@ -14,7 +14,7 @@ use App\Model\Discount;
  * Discount case 3:
  * If you buy two or more products of category "Tools" (id 1), you get a 20% discount on the cheapest product.
  */
-class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory
+class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory implements iDiscount
 {
     private $reason;
     private $pctDiscount;

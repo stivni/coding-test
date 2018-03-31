@@ -21,6 +21,4 @@ class Discount
         $this->reason = $reason;
         $this->discount = $discount;
     }
-
-
 }

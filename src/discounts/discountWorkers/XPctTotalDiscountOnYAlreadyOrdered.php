@@ -15,7 +15,7 @@ use App\Model\Discount;
  * Discount case 1:
  * Customers that have already ordered for over € X get a Y% discount on every order they make.
  */
-class XPctTotalDiscountOnYAlreadyOrdered
+class XPctTotalDiscountOnYAlreadyOrdered implements IDiscount
 {
     private $reason;
     private $totalOrderedRequirement;

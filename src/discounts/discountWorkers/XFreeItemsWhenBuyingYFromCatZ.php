@@ -13,7 +13,7 @@ use App\Data\ProductRepo;
 use App\Model\Discount;
 
 
-class XFreeItemsWhenBuyingYFromCatZ
+class XFreeItemsWhenBuyingYFromCatZ implements iDiscount
 {
     /**
      * Discount case 2:
