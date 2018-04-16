@@ -13,6 +13,9 @@ use PHPUnit\Framework\TestCase;
 
 class XPctTotalDiscountOnYAlreadyOrderedTest extends TestCase
 {
+
+    //FIXME
+
     /**
      * Discount case 1:
      * Customers that have already order for over € 1000 get a 10% discount on every order they make.

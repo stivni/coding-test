@@ -7,7 +7,7 @@
  */
 
 
-namespace App\Discounts\DiscountWorkers;
+namespace App\Discounts\DiscountTypes;
 
 use App\Data\CustomerRepo;
 use App\Model\Discount;
@@ -27,7 +27,7 @@ class XPctTotalDiscountOnYAlreadyOrdered implements IDiscount
      * @param $totalOrderedRequirement
      * @param $pctDiscount
      */
-    public function __construct($reason, $totalOrderedRequirement, $pctDiscount)
+    function __construct($reason, $totalOrderedRequirement, $pctDiscount)
     {
         $this->reason = $reason;
         $this->totalOrderedRequirement = $totalOrderedRequirement;

@@ -6,7 +6,7 @@
  * Time: 16:24
  */
 
-namespace App\discounts\discountWorkers;
+namespace App\discounts\discountTypes;
 
 
 interface IDiscount

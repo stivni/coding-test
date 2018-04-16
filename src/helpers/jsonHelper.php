@@ -22,9 +22,10 @@ class jsonHelper
     static function jsonSchemaChecker($data)
     {
         $data = json_decode($data);
-        // Validate
+
         $validator = new Validator();
         $validator->validate($data, (object)['$ref' => 'file://' . realpath(__dir__ . '/discountJSONSchema.json')]);
+
 
         if ($validator->isValid()) {
             return true;

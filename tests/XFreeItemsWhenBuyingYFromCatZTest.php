@@ -18,6 +18,8 @@ class XFreeItemsWhenBuyingYFromCatZTest extends TestCase
      * For every product of category "Switches" (id 2), when you buy five, you get a sixth for free.
      */
 
+    //FIXME
+
     public function testFreeItemsWhenBuying5FromCategory2()
     {
         $order = '{

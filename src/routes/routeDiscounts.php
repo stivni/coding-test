@@ -13,18 +13,23 @@ use App\Helpers\jsonHelper;
  * Time: 22:15
  */
 
+// TODO IMPLEMENT PARTIAL DISCOUNT
+
 $app = new \Slim\App;
 
 $app->post('/api/discounts', function (Request $request, Response $response) {
 
 
     $cType = $request->getHeader('Content-Type');
-    if (strcmp($cType[0], 'application/json') !== false && jsonHelper::isJson($request->getBody()) && jsonHelper::jsonSchemaChecker($request->getBody())) {
+
+    if (strcmp($cType[0], 'application/json') !== false &&
+        jsonHelper::isJson($request->getBody()) &&
+        jsonHelper::jsonSchemaChecker($request->getBody())) {
 
         $order = json_decode($request->getBody());
         $discountCalculator = new DiscountCalculator();
-        $order = $discountCalculator->calcDiscounts($order);
-        return $response->withJSON($order);
+        $discountCalculator->calcDiscounts($order);
+        return $response->withJSON($order)->withStatus(200);
     } else {
         return $response->withStatus(500)
             ->withHeader('Content-Type', 'text/html')

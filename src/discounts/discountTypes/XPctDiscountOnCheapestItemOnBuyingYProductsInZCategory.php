@@ -6,7 +6,7 @@
  * Time: 18:47
  */
 
-namespace App\Discounts\DiscountWorkers;
+namespace App\Discounts\DiscountTypes;
 
 use App\Data\ProductRepo;
 use App\Model\Discount;
@@ -28,7 +28,7 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory implements iDiscoun
      * @param $numberOfProductsNeeded
      * @param $validCategory
      */
-    public function __construct($reason, $pctDiscount, $numberOfProductsNeeded, $validCategory)
+    function __construct($reason, $pctDiscount, $numberOfProductsNeeded, $validCategory)
     {
         $this->reason = $reason;
         $this->pctDiscount = $pctDiscount;
@@ -68,7 +68,7 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory implements iDiscoun
     /**
      * @return mixed
      */
-    public function getReason()
+    private function getReason()
     {
         return $this->reason;
     }
@@ -77,7 +77,7 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory implements iDiscoun
     /**
      * @return mixed
      */
-    public function getPctDiscount()
+    private function getPctDiscount()
     {
         return $this->pctDiscount;
     }
@@ -86,7 +86,7 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory implements iDiscoun
     /**
      * @return mixed
      */
-    public function getNumberOfProductsNeeded()
+    private function getNumberOfProductsNeeded()
     {
         return $this->numberOfProductsNeeded;
     }
@@ -95,7 +95,7 @@ class XPctDiscountOnCheapestItemOnBuyingYProductsInZCategory implements iDiscoun
     /**
      * @return mixed
      */
-    public function getValidCategory()
+    private function getValidCategory()
     {
         return $this->validCategory;
     }

@@ -6,19 +6,18 @@
  * Time: 16:54
  */
 
-namespace App\Discounts\DiscountWorkers;
+namespace App\Discounts\DiscountTypes;
 
 
 use App\Data\ProductRepo;
 use App\Model\Discount;
 
-
+/**
+ * Discount case 2:
+ * For every product of category "Switches" (id 2), when you buy five, you get a sixth for free.
+ */
 class XFreeItemsWhenBuyingYFromCatZ implements iDiscount
 {
-    /**
-     * Discount case 2:
-     * For every product of category "Switches" (id 2), when you buy five, you get a sixth for free.
-     */
 
     private $reason;
     private $numberOfFreeItems;
@@ -33,7 +32,7 @@ class XFreeItemsWhenBuyingYFromCatZ implements iDiscount
      * @param $numberOfItemsNeeded
      * @param $validCategory
      */
-    public function __construct($reason, $numberOfFreeItems, $numberOfItemsNeeded, $validCategory)
+    function __construct($reason, $numberOfFreeItems, $numberOfItemsNeeded, $validCategory)
     {
         $this->reason = $reason;
         $this->numberOfFreeItems = $numberOfFreeItems;
@@ -66,12 +65,12 @@ class XFreeItemsWhenBuyingYFromCatZ implements iDiscount
         }
     }
 
-    function calcNumberOfFreeItems($item)
+    private function calcNumberOfFreeItems($item)
     {
         return intdiv($item->quantity, $this->getNumberOfItemsNeeded()) * $this->getNumberOfFreeItems();
     }
 
-    function applyDiscounts(&$order, &$item, $numberOfFreeItemsToAdd)
+    private function applyDiscounts(&$order, &$item, $numberOfFreeItemsToAdd)
     {
 
         $discount = $numberOfFreeItemsToAdd * $item->{"unit-price"};
@@ -83,7 +82,7 @@ class XFreeItemsWhenBuyingYFromCatZ implements iDiscount
     /**
      * @return mixed
      */
-    public function getReason()
+    private function getReason()
     {
         return $this->reason;
     }
@@ -92,7 +91,7 @@ class XFreeItemsWhenBuyingYFromCatZ implements iDiscount
     /**
      * @return mixed
      */
-    public function getNumberOfFreeItems()
+    private function getNumberOfFreeItems()
     {
         return $this->numberOfFreeItems;
     }
@@ -101,7 +100,7 @@ class XFreeItemsWhenBuyingYFromCatZ implements iDiscount
     /**
      * @return mixed
      */
-    public function getNumberOfItemsNeeded()
+    private function getNumberOfItemsNeeded()
     {
         return $this->numberOfItemsNeeded;
     }
@@ -110,11 +109,10 @@ class XFreeItemsWhenBuyingYFromCatZ implements iDiscount
     /**
      * @return mixed
      */
-    public function getValidCategory()
+    private function getValidCategory()
     {
         return $this->validCategory;
     }
-
 
 
 }
